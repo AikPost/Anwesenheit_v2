@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Email Sender</title>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js"></script>
+    <!--
+            <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script> 
+            
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+            
+            <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+            
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+            -->
+
+
+    <script
+        src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
+</head>
+
+<body>
+    <div id="Hallo">
+
+        <label for="trainer_mail_csv">Trainer - Mail</label><br>
+        <textarea name="trainer_mail_csv" id="trainer_mail_csv" style="width:55%"></textarea>
+        <br>
+        <label for="csv_sep">CSV-Trennzeichen</label>
+        <input value=";" id="csv_sep" name="csv_sep">
+        <br>
+        <label for="mail_betreff">Betreff</label><br>
+        <input type="text" name="mail_betreff" id="mail_betreff" />
+        <br>
+        <label for="mail_content">Mail Inhalt</label><br>
+        <textarea id="mail_content" style="width:55%"
+            name="mail_content">{vorname}, {nachname}, {name} fügen entsprechend aus der obigen Liste ein.</textarea>
+        <br>
+        <button id="mail_send_button">Via Mailto Entwürfe an alle Adressaten öffnen</button>
+    </div>
+    <script src="script_email_send.js"></script>
+</body>
+
+</html>

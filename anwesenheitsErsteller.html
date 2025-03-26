@@ -1,0 +1,413 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Anwesenheitslistenersteller</title>
+	<meta charset="UTF-8" />
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js"></script>
+	<!--
+		<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script> 
+		
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+		
+		<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+		
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+		-->
+
+
+	<script
+		src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
+	<link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+	<div id="main_content">
+		<div id="manual" style="display: none" hidden>
+			<h1>Anleitung</h1>
+			<div>
+				<h3>Einpflegen der Kursdaten</h3>
+				<ol>
+					<li>
+						Option 1: Manuell eintragen:
+						<br>
+						Kursdaten können manuell eingetragen werden, indem ein neuer Eintrag mittels des Knopfes "Kurs
+						hinzufügen" angelegt wird.
+					</li>
+					<li>
+						Option 2: Aus Speicherdatei laden:
+						<br>
+						Mittels des Knopfes "Import: Kurse + Anwesenheit" kann eine zuvor gespeicherte Datei geladen
+						werden.
+					</li>
+					<li>
+						Option 3: Kurse aus RWC-Kalender importieren:
+						<br>
+						<a id="booklet_calender_export"
+							href="javascript:(function%20()%20%7B%0A%20%20%20%20out%20=%20new%20Object();%0A%20%20%20%20function%20parse_date_time_string(out_obj,%20str_in%20=%20%22%22)%20%7B%0A%20%20%20%20%20%20%20%20out_obj.day%20=%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Mo%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Di%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Mi%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Do%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Fr%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Sa%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%22So%22%0A%20%20%20%20%20%20%20%20%5D.indexOf(str_in.substr(0,%202));%0A%0A%20%20%20%20%20%20%20%20let%20time_string%20=%20str_in.split(%22,%22)%5B2%5D;%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20let%20%5BstartTime,%20endTime%5D%20=%20time_string.split(%22%E2%80%93%22);%0A%0A%20%20%20%20%20%20%20%20out_obj.startTime%20=%20startTime.trim();%0A%20%20%20%20%20%20%20%20out_obj.endTime%20=%20endTime.trim();%0A%20%20%20%20%7D%0A%0A%20%20%20%20document.querySelectorAll(%22dl%22).forEach(%0A%20%20%20%20%20%20%20%20function%20(item,%20index)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20item.click();%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20out_obj%20=%20new%20Object();%0A%20%20%20%20%20%20%20%20%20%20%20%20details_object%20=%20document.querySelector(%22.details%22);%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20out_obj.course_id%20=%20index;%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20try%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20out_obj.name%20=%20details_object.querySelector(%22.title%22).innerText;%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20catch%20(err)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20console.log(%22No%20title%22,%20item);%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20try%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20parse_date_time_string(out_obj,%20details_object.querySelector(%22.event-when%22).innerText);%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20catch%20(err)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20console.log(%22Kein%20parsebares%20Datum%22,%20item);%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20try%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20out_obj.location%20=%20details_object.querySelector(%22.event-where%22).innerText.replace(%22(Karte)%22,%22%22);%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20catch%20(err)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20console.log(%22Kein%20Ort%22,%20item);%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20try%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20out_obj.trainer%20=%20details_object.querySelector(%22.event-description%22).innerText.split(%22:%22).at(-1).trim();%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20catch%20(err)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20console.log(%22Kein%20trainer%22,%20item);%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20out%5B%22crs%22+index%5D%20=%20new%20Object();%0A%20%20%20%20%20%20%20%20%20%20%20%20out%5B%22crs%22+index%5D.course_object%20=%20out_obj;%0A%20%20%20%20%20%20%20%20%20%20%20%20out%5B%22crs%22+index%5D.attendance_object%20=%20new%20Object();%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20)%0A%0A%20%20%20%20console.log(out);%0A%20%20%20%20prompt(%22Kursdaten%22,%20JSON.stringify(out));%0A%7D());">Kalender
+							export Booklet
+						</a><br>
+						Booklet, um den Kalender des RWC auszulesen und eine json Datei mit allen Kursdaten zu
+						erstellen. Diese kann mittels Option 2 importiert werden.
+						Diesen Link als Lesezeichen speichern, dann den gewünschten Kalender in Wochenansicht öffnen.
+						(Das Tool speichert nur die angezeigte Woche).
+						<ul>
+							<li>
+								(Firefox:) Rechtsklick auf Kalender-Widget
+							</li>
+							<li>Dieser Frame </li>
+							<li>Nur diesen Frame anzeigen > Laden </li>
+							<li>auf das Booklet/Lesezeichen klicken </li>
+							<li>Text aus Prompt kopieren und in Datei mit Endung .json abspeichern</li>
+							<li>Diese Datei hier öffnen (Strg + O) oder Importieren-Knopf</li>
+						</ul>
+
+
+					</li>
+				</ol>
+			</div>
+			<div>
+				<h3>Formulare erstellen</h3>
+				Vor der Erstellung bitte in der Seitenleiste einen Quartalsnamen, die Teilnehmerzahl/Liste sowie die Zeitraumgrenzen angeben.
+				Die Grenzen sind als Montage der entsprechenden Wochen zu wählen, diese Wochen werden inklusive geführt.
+
+				Nachdem die Kurse in der Kursliste eingetragen wurden, können die Listen mithilfe des Button "Listen generieren" im Bereich "Listenfunktionen" der Seitenleiste
+				generiert werden. <b>Die aktuellen Listen werden dabei überschrieben!</b>.
+				
+				Die Listen werden für den in der Seitenleiste angegebenen Zeitraum mit angegebener Teilnehmerzahl erstellt.
+
+				Die generierten Listen können mittels der Maus bearbeitet werden.
+				<ul>
+					
+					<li>
+						Klickt man im Tabellenkopf auf ein Datum/KW, so wird diese Woche als geplant ausgefallen markiert. 
+					</li>
+					<li>
+						Strg+Klick markiert kurzfristiges ausfallen.
+					</li>
+					<li>
+						Teilnehmende können mit Namen in den Eingabefeldern in der Namenspalte eingetragen werden.
+					</li>
+					<li>
+						Die Teilnahme eines Mitglieds kann mittels Linksklick auf die entsprechende Zelle markiert werden.
+					</li>
+					<li>
+						Strg+Klick auf eine Zelle markiert diesen Termin als Schnuppertraining für diese Person.
+					</li>
+				</ul>
+
+				Für das erstellen der PDFs wird die Seite mittels der Druck-zu-PDF-Funktion des Browsers gedruckt (Strg + P). 
+				Die Seite muss hierfür in den Druckeinstellungen korrekt skaliert werden; zum Druck der Tabellengrenzen und Hintergründe muss die Option "Print backgrounds"/"Hintergrund drucken" (in Firefox, andere Browser können abweichen) ausgewählt werden.
+				
+				Man erhält ein PDF mit allen Listen. Zum Aufteilen für den Versand bietet es sich an, die Seiten mittels eines Tools wie PDF24 in einen neuen Ordner aufzuteilen.
+				Dabei muss die Seitenordnung erhalten bleiben. 
+				
+				Der Knopf "Powershellcmd: Rename PDFs" erzeugt ein Kommando, dass die getrennten PDFs neu benennt.
+
+				Im neuen Ordner, der nur die neuen, seitenweisen PDFs enthält, kann nun mittels der Powershell dieses Kommando ausgeführt werden.
+			</div>
+
+			<div>
+				<h3>Speichern und Laden</h3>
+				Die Speicher und Ladefunktionen befinden sich in der Seitenleiste im Bereich "Import & Export".
+				<ul>
+					<li>
+						"Export: Kursdaten (csv)" exportiert die eingegebenen Kursdaten als csv Datei, die etwa in Excel bearbeitet werden kann. 
+					</li>
+					<li>
+						"Export: Kurse + Anwesenheit" sowie das Import Pendant speichern bzw. Laden die eingegebenen Kurse sowie die bereits eingegebenen Teilnahmedaten. (Namen, ausgefallene Termine, etc.)
+						Diese Funktionen sind via "Strg + S" sowie "Strg + O" aufrufbar. Vor "Strg + O" muss eine Seiteninteraktion (Klick an beliebiger Stelle etwa) stattgefunden haben, da der Browser ansonsten evtl. das Öffnen des Systemfelds nicht zulässt.
+						Ich bitte darum, häufig zu speichern.
+						Quartalname, Zeitraum und Teilnehmerzahlen werden nicht gespeichert und müssen beim neuen Laden der Seite ggf. erneut eingetragen werden!
+					</li>
+					<li>
+						"Export: Anwesenheiten (csv)" exportiert die Anwesenheiten als csv-Datei für die Verwendung in Excel.
+						Weiteres in einem folgenden Abschnitt.
+					</li>
+				</ul>
+			</div>
+
+			<h3>Anwesenheits-CSVs in Excel importieren</h3>
+			<div>
+				Mittels des Knopfes "Export: Kursdaten (csv)" lassen sich alle
+				Excel besitzt keine native Möglichkeit, mehrere CSVs auf einmal zu importieren.
+				Wer willens ist, python zu benutzen, nutze das folgende, wer dies nicht ist wünsche ich gute Nerven beim
+				manuellen importieren.
+				<pre>
+import pandas as pd , os
+
+def readCSV(fileName):
+	try:
+		return pd.read_csv(fileName, sep=None,engine="python")
+	
+	except Exception as e:
+		print(fileName)
+		print(e)
+
+
+
+a = filter(lambda x: x[-4:] == ".csv",os.listdir())
+
+a = {fileName: readCSV(fileName) for fileName in a}
+
+with pd.ExcelWriter("whyMustIDoThisGates.xlsx") as writer:
+	for fileName, fileDf in a.items():
+		fileDf.to_excel(writer, sheet_name=fileName[:-4][0:31],index=False, header=False)
+</pre>
+			</div>
+		</div>
+		<div id="email_tool" style="display: none">
+
+			<label for="trainer_mail_csv">Trainer - Mail</label>
+			<button id="button_import_from_course_list" alt="Fügt die Trainer aus der Kursliste dem Textfeld hinzu.">
+				Von Kursliste übernehmen
+			</button>
+			<br>
+			<textarea name="trainer_mail_csv" id="trainer_mail_csv" style="width:55%"></textarea>
+			<br>
+			<label for="csv_sep">CSV-Trennzeichen</label>
+			<input value="%09" id="csv_sep" name="csv_sep">
+			<br>
+			<label for="mail_betreff">Betreff</label><br>
+			<input type="text" name="mail_betreff" id="mail_betreff" value="[RWC Gießen] Anwesenheitslisten" />
+			<br>
+			<label for="mail_content">Mail Inhalt</label><br>
+			<textarea id="mail_content" style="width:55%" title="{vorname}, {nachname}, {name} fügen entsprechend aus der obigen Liste ein.\n{kurse} fügt eine Liste der Kurse ein."
+				name="mail_content">Hallo {vorname},
+
+anbei findest Du die Anwesenheitslisten für Deine Tanzkurse für den kommenden Zeitraum von {qStart} bis {qEnde}.
+
+Mit besten Grüßen
+
+Tobias Post 
+für den RWC Gießen e.V. 
+Beisitz Sport 
+</textarea>
+			<br>
+			<button id="mail_send_button">Via Mailto Entwürfe an alle Adressaten öffnen</button>
+		</div>
+		<script src="script_email_send.js"></script>
+		<table id="course_data_table" class="noPrint">
+			<thead>
+				<tr>
+					<th>Aktionen</th>
+					<th>Kürzel</th>
+					<th>Kursbezeichnung</th>
+					<th>Übungsleiter</th>
+					<th>Wochentag</th>
+					<th>Zeit</th>
+					<th>Ort</th>
+					<th>Kontakt</th>
+				</tr>
+			</thead>
+			<tbody id="course_data_tbody">
+				<tr class="course_data_trow" width="100%" hidden="1" courseData="course_">
+					<td class="course_data_td_buttons">
+						<input class="print_toggle" title="Drucken" type="checkbox" checked />
+						<button class="delete">Löschen</button>
+						<button class="move">Beweg.</button>
+						<button class="scroll_to_attendance_sheet">Jump to</button>
+					</td>
+					<td class="course_data_td_id" hidden>
+						<input class="course_data_input" course_data="course_id" type="text" />
+					</td>
+					<td class="course_data_td_abbreviation">
+						<input class="course_data_input" course_data="abbreviation" type="text" maxlength="12" width="12em"/>
+					</td>
+					<td class="course_data_td_name">
+						<input class="course_data_input" course_data="name" type="text" />
+					</td>
+					<td class="course_data_td_trainer">
+						<input type="text" class="course_data_input" course_data="trainer" />
+					</td>
+					<td class="course_data_td_day">
+						<select class="course_data_input" course_data="day">
+							<option value="0">Montag</option>
+							<option value="1">Dienstag</option>
+							<option value="2">Mittwoch</option>
+							<option value="3">Donnerstag</option>
+							<option value="4">Freitag</option>
+							<option value="5">Samstag</option>
+							<option value="6">Sonntag</option>
+						</select>
+					</td>
+					<td class="course_data_td_startTime">
+						<input class="course_data_input" type="time" course_data="startTime" />
+						-
+						<input class="course_data_input" type="time" course_data="endTime" />
+					</td>
+					<td class="course_data_td_location">
+						<input type="text" class="course_data_input" value="Clubheim, Uferweg 4"
+							course_data="location" />
+					</td>
+					<td class="course_data_td_contact">
+						<input type="text" class="course_data_input" course_data="contact" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div id="attendance_div_container">
+			<div class="attendance_div" course_id="template" hidden>
+				<div class="attendance_sheet_header" style="text-align: center">
+					<h2>
+						Anwesenheitsliste
+					</h2>
+					<h4 class="attendance_sheet_course_data" course_data="name"></h4>
+
+					<table class="attendance_sheet_course_data_table" style="width: 100%">
+						<tr>
+							<td style="text-align: left">
+								Zeit:
+								<span class="attendance_sheet_course_data" course_data="day"></span>,
+								<span class="attendance_sheet_course_data" course_data="startTime"></span>
+								-
+								<span class="attendance_sheet_course_data" course_data="endTime"></span>
+							</td>
+							<td style="text-align: left">
+								Ort:
+								<span class="attendance_sheet_course_data" course_data="location"></span>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left">
+								Kursleitung:
+								<span class="attendance_sheet_course_data" course_data="trainer"></span>
+							</td>
+							<td style="text-align: left">
+								Kontakt:
+								<span class="attendance_sheet_course_data" course_data="contact"></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="attendance_sheet_content_div">
+					<table class="attendance_sheet_content_table">
+						<thead class="attendance_sheet_content_head">
+
+
+						</thead>
+						<tbody class="attendance_sheet_table_body">
+						</tbody>
+					</table>
+				</div>
+				<div id="sheetFooter" class="sheetFooter">
+					<table class="footerTable">
+						<tbody>
+							<tr>
+								<td class="signature">Unterschrift Trainer</td>
+								<td>
+									x: Teilgenommen
+									<br />
+									s: Nichtmitglied mit Interesse
+								</td>
+								<td>
+									Am Ende des Quartals ist das Original unterschrieben an den
+									Vorstand zu übermitteln.
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="side_bar" class="noPrint">
+		<fieldset id="quarter_data_div" class="noPrint">
+			<legend>Quartaldaten</legend>
+			<label for="quarter_name">Name des Zeitraums</label><br>
+			<input name="quarter_name" type="text" id="quarter_name" class="quarter_data fit_width_input"
+				title="YYYY_mmm-mmm; e.g. 2025_Jan-Mrz" value="Quartalname" />
+			<br>
+			<label for="quarter_starting_monday">Erster Montag des Zeitraumes</label>
+			<br>
+			<input name="quarter_starting_monday" type="date" id="quarter_starting_monday"
+				class="quarter_data fit_width_input" />
+			<br>
+			<label for="quarter_ending_monday">Letzter Montag des Zeitraums</label>
+			<br>
+			<input type="date" name="quarter_ending_monday" id="quarter_ending_monday"
+				class="quarter_data fit_width_input"/>
+			<br>
+			<label for="quarter_attendee_count">Teilnehmerzeilen</label>
+			<br>
+			<input type="number" name="quarter_attendee_count" id="quarter_attendee_count" step="1" min="1" value="30"
+				class="quarter_data fit_width_input" />
+		</fieldset>
+
+		<fieldset id="other_control_buttons" class="noPrint">
+			<legend>Tools</legend>
+			<button id="button_toggle_email_send" class="fit_width_input">Toggle Email Versand Tool</button>
+			<button id="button_toggle_manual" class="fit_width_input">Anleitung anzeigen/verstecken</button>
+			<br>
+			<button id="button_make_rename_command" class="fit_width_input"
+				title="Mit PDF-Tools (eg. PDF24) das gespeicherte PDF splitten, dann dieses (Windows Powershell) Kommando nutzen, um die entstandenen PDFs zu benennen.">Powershellcmd:
+				Rename PDFs</button>
+			<button id="button_export_ical" class="fit_width_input">Kalender aus Kursen erstellen</button>
+		</fieldset>
+		<fieldset id="course_control_buttons" class="noPrint">
+			<legend>Kursfunktionen</legend>
+			<button id="button_add_row" class="fit_width_input">Kurs hinzufügen</button><br>
+
+			<button id="button_delete_all_courses" class="fit_width_input">Alle löschen</button><br>
+
+			<label for="checkbox_toggle_course_selection">Alle aus/abwählen</label>
+			<input name="checkbox_toggle_course_selection" id="checkbox_toggle_course_selection" type="checkbox" checked
+				title="Kursauswahl togglen" />
+			<br>
+
+			<button id="button_sort_trainer" class="fit_width_input" title="Sortiert lexikografisch nach Trainernamen">
+				Nach Trainer sortieren
+			</button>
+			<br>
+			<button id="button_sort_time" class="fit_width_input"
+				title="Sortiert zuerst nach Tag, dann nach Beginn des Kurses">
+				Nach Zeit sortieren
+			</button>
+		</fieldset>
+
+
+		<fieldset id="attendance_control_buttons" class="noPrint">
+			<legend>Listenfunktionen</legend>
+			<button id="button_generate_plans" class="fit_width_input">Listen generieren</button>
+			<button id="button_copy_visibility" class="fit_width_input">Sichtbarkeit kopieren</button>
+
+			<!--<button id="button_print_each" title="">Einzelne Seiten drucken</button>
+			<button id="button_export_csv_attendances">CSV exportieren</button>
+			<button id="button_export_attendance_csvs">
+			CSV einzeln exportieren
+		</button>-->
+			<!--<button id="button_import_all">Daten importieren</button>-->
+		</fieldset>
+
+		<fieldset id="io_control_buttons">
+			<legend>Import & Export</legend>
+			<button id="button_export_courses_as_csv" class="fit_width_input">Export: Kursdaten (csv)</button>
+			<button id="button_export_all" title="(Strg + s)" class="fit_width_input">Export: Kurse +
+				Anwesenheit</button>
+			<button id="button_export_all" title="(Strg + o)" class="fit_width_input"
+				onclick="$('#button_open_json_all_data').click()">Import:
+				Kurse + Anwesenheit</button>
+			<input id="button_open_json_all_data" type="file" accept=".json" hidden>
+			<button id="button_export_attendance_csv" class="fit_width_input">Export: Anwesenheiten (csv)</button>
+			<button id="button_export_attendance_html" class="fit_width_input">Export: Listen (HTMLs)</button>
+			<button id="button_export_jsonForExcel" class="fit_width_input">Export: Kursdaten für Excel</button>
+		</fieldset>
+	</div>
+	<script src="scripts/script_main.js"></script>
+	<script src="scripts/script_attendance.js"></script>
+	<script src="scripts/script_attendance_generation.js"></script>
+	<script src="scripts/script_course_data.js"></script>
+	<script src="scripts/script_course_data_management.js"></script>
+	<script src="scripts/script_import_export.js"></script>
+	<script src="scripts/script_email_tool.js"></script>
+	<script src="scripts/script_email_send.js"></script>
+	<script src="scripts/script_export_ical.js"></script>
+	<script src="scripts/script_export_html.js"></script>
+	<script src="scripts/script_export_coursesByTrainer.js"></script>
+	<script src="scripts/script_init.js"></script>
+</body>
+
+</html>
