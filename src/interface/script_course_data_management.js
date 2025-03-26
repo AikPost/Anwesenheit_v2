@@ -1,9 +1,4 @@
-function compare_strings(s_1, s_2) {
-    console.log(s_1, s_2)
-    if (s_1 < s_2) return -1
-    if (s_1 === s_2) return 0
-    if (s_1 > s_2) return 1
-}
+
 
 function copy_visibility_to_attendance_sheets() {
     const attendance_divs = $(".attendance_div:not([hidden])")
@@ -68,4 +63,3 @@ function get_attendance_list_data(selector) {
 
     return out
 }
-

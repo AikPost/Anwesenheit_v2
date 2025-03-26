@@ -81,3 +81,23 @@ function addDays(date, days) {
 function shortDateString(inDate) {
     return inDate.getDate() + "." + (inDate.getMonth() + 1) + "."
 }
+
+/**
+ * Create a string in ical date format representing the given date
+ * @param {Date} dateIn 
+ * @returns {str} Date String for use in an ical file
+ */
+function icalStringFromDate(dateIn) {
+
+    return [
+        dateIn.getFullYear().toString().padStart(4, "0"),
+        (dateIn.getMonth() + 1).toString().padStart(2, "0"),
+        dateIn.getDate().toString().padStart(2, "0"),
+        "T",
+        dateIn.getHours().toString().padStart(2, "0"),
+        dateIn.getMinutes().toString().padStart(2, "0"),
+        dateIn.getSeconds().toString().padStart(2, "0")
+    ].join("")
+
+
+}

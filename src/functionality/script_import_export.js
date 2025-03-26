@@ -52,7 +52,7 @@ function export_attendances_as_csv() {
             ]
             .join("_")
             .replaceAll(" ","_")
-            Helpers.download(courseAttendances, fileName + ".csv", "text/csv")
+            download(courseAttendances, fileName + ".csv", "text/csv")
         }
     )
 }
@@ -94,7 +94,7 @@ function export_all() {
     let filename = dateString + "_course_and_attendance.json";
     let userInput = prompt("Dateinamen eingeben:", filename);
     if (userInput) filename = userInput;
-    Helpers.download(JSON.stringify(out), filename, "text/json")
+    download(JSON.stringify(out), filename, "text/json")
 
     //prompt("JSON Export", JSON.stringify(out))
 }
@@ -122,8 +122,8 @@ function import_all_helper(user_input_parsed) {
         quarter_attendee_count: $("#quarter_attendee_count").val(),
     }
 
-    quarter_data.quarter_starting_week = Helpers.calendarWeekOf(new Date(quarter_data.quarter_starting_monday))
-    quarter_data.quarter_ending_week = Helpers.calendarWeekOf(new Date(quarter_data.quarter_ending_monday))
+    quarter_data.quarter_starting_week = calendarWeekOf(new Date(quarter_data.quarter_starting_monday))
+    quarter_data.quarter_ending_week = calendarWeekOf(new Date(quarter_data.quarter_ending_monday))
 
     quarter_data.quarter_week_count = quarter_data.quarter_ending_week - quarter_data.quarter_starting_week + 1
 

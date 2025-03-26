@@ -13,5 +13,5 @@ function exportQuarterCourseData() {
         }
     }
 
-    Helpers.download(JSON.stringify(outputObj),"courses_"+ quarterName +".json", "text/json")
+    downloadDataAsFile(JSON.stringify(outputObj),"courses_"+ quarterName +".json", "text/json")
 }

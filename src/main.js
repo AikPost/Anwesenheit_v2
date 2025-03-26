@@ -1,0 +1,4 @@
+initKeyEventHandlers();
+initButtons();
+initAttendanceClickHandlers();
+initSideBarButtons();

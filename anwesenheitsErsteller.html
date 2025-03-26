@@ -396,18 +396,36 @@ Beisitz Sport
 			<button id="button_export_jsonForExcel" class="fit_width_input">Export: Kursdaten für Excel</button>
 		</fieldset>
 	</div>
-	<script src="scripts/script_main.js"></script>
-	<script src="scripts/script_attendance.js"></script>
-	<script src="scripts/script_attendance_generation.js"></script>
-	<script src="scripts/script_course_data.js"></script>
-	<script src="scripts/script_course_data_management.js"></script>
-	<script src="scripts/script_import_export.js"></script>
-	<script src="scripts/script_email_tool.js"></script>
-	<script src="scripts/script_email_send.js"></script>
-	<script src="scripts/script_export_ical.js"></script>
-	<script src="scripts/script_export_html.js"></script>
-	<script src="scripts/script_export_coursesByTrainer.js"></script>
-	<script src="scripts/script_init.js"></script>
+
+	<!--helpers-->
+	<script src="src/helpers/dateFunctions.js"></script>
+	<script src="src/helpers/downloadHelper.js"></script>
+	<script src="src/helpers/misc.js"></script>
+	<script src="src/helpers/otherProgramsInterface.js"></script>
+
+	<!--interface new -->
+	<script src="src/interface/attendanceCellModifications.js"></script>
+	<script src="src/interface/callbackDefinitions.js"></script>
+	<script src="src/interface/attendanceData.js"></script>
+	<script src="src/interface/courseData.js"></script>
+	<script src="src/interface/dataClasses.js"></script>
+
+
+	<!--interface old-->
+	<script src="src/interface/script_course_data_management.js"></script>
+
+
+	<!--functionality new-->
+	<!--functionality old-->
+	<script src="src/functionality/script_attendance_generation.js"></script>
+	<script src="src/functionality/script_import_export.js"></script>
+	<script src="src/functionality/script_email_tool.js"></script>
+	<script src="src/functionality/script_email_send.js"></script>
+	<script src="src/functionality/script_export_ical.js"></script>
+	<script src="src/functionality/script_export_html.js"></script>
+	<script src="src/functionality/script_export_coursesByTrainer.js"></script>
+
+	<script src="src/main.js"></script>
 </body>
 
 </html>

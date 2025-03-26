@@ -1,25 +1,3 @@
-function initialize_ical_export_functionality(){
-    $("#button_export_ical").on(
-        "click",
-        export_courses_as_ical
-    )
-}
-
-function date_to_ical(dateIn) {
-
-    return [
-        dateIn.getFullYear().toString().padStart(4, "0"),
-        (dateIn.getMonth() + 1).toString().padStart(2, "0"),
-        dateIn.getDate().toString().padStart(2, "0"),
-        "T",
-        dateIn.getHours().toString().padStart(2, "0"),
-        dateIn.getMinutes().toString().padStart(2, "0"),
-        dateIn.getSeconds().toString().padStart(2, "0")
-    ].join("")
-
-
-}
-
 function course_tr_to_ical_event(sel_course) {
     let course_name = sel_course.find(".course_data_input[course_data=name]").val()
     let course_day = +sel_course.find(".course_data_input[course_data=day]").val()
@@ -52,10 +30,10 @@ function course_tr_to_ical_event(sel_course) {
         "SUMMARY:" + course_name,
         "DESCRIPTION:" + "Trainer\\: " + course_trainer,
         "LOCATION:" + course_location,
-        "DTSTAMP:" + date_to_ical(event_course_date_start),
-        "DTSTART:" + date_to_ical(event_course_date_start),
-        "DTEND:" + date_to_ical(event_course_date_end),
-        "RRULE:FREQ=WEEKLY;UNTIL=" + date_to_ical(data_timeframe_end),
+        "DTSTAMP:" + icalStringFromDate(event_course_date_start),
+        "DTSTART:" + icalStringFromDate(event_course_date_start),
+        "DTEND:" + icalStringFromDate(event_course_date_end),
+        "RRULE:FREQ=WEEKLY;UNTIL=" + icalStringFromDate(data_timeframe_end),
         "END:VEVENT"
     ].join("\r\n")
 }
@@ -83,7 +61,7 @@ function export_courses_as_ical(download = true) {
 
     if (!download) return calendar_data;
 
-    Helpers.download(
+    download(
         calendar_data,
         "exported_calendar.ics",
         "text/calendar"
