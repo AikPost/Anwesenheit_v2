@@ -25,8 +25,8 @@ function generate_attendance_calendar_date_row(col_count = 10, starting_date_str
     for (let col_index = 0; col_index < col_count; col_index++) {
         new_attendance_sheet_table_thr_date.append(
             $('<th class="attendance_sheet_table_date_header_cell"></th>').text(
-                Helpers.shortDateString(
-                    Helpers.addDays(starting_date, 7 * col_index + weekday_offset)
+                shortDateString(
+                    addDays(starting_date, 7 * col_index + weekday_offset)
                 )
             )
         )
@@ -74,7 +74,7 @@ function generate_single_plan(course, quarter_data, html_templates) {
                     .val()
 
                 if (course_attribute == "day") {
-                    new_text = Helpers.weekDay(Number(new_text))
+                    new_text = getVerbatimWeekday(Number(new_text))
                 }
 
                 $(this).text(new_text)
@@ -123,10 +123,10 @@ function generate_plans() {
     quarter_data.starting_date = new Date(quarter_data.quarter_starting_monday);
     quarter_data.ending_date = new Date(quarter_data.quarter_ending_monday);
 
-    quarter_data.quarter_starting_week = Helpers.calendarWeekOf(quarter_data.starting_date)
-    quarter_data.quarter_ending_week = Helpers.calendarWeekOf(quarter_data.ending_date)
+    quarter_data.quarter_starting_week = calendarWeekOf(quarter_data.starting_date)
+    quarter_data.quarter_ending_week = calendarWeekOf(quarter_data.ending_date)
 
-    quarter_data.quarter_week_count = Helpers.weekDifference(quarter_data.starting_date, quarter_data.ending_date)
+    quarter_data.quarter_week_count = weekDifference(quarter_data.starting_date, quarter_data.ending_date)
 
     const html_templates = {
         attendance_list: $(".attendance_div[course_id=template]"),

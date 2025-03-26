@@ -4,7 +4,7 @@
  * @param {Date} date_in 
  * @returns {int} calendar week (1 indexed)
  */
-function calenderWeekOf(date) {
+function calendarWeekOf(date) {
     // Kopiere das Datum, um das ursprüngliche Datum nicht zu verändern
     const tempDate = new Date(date);
     
@@ -73,6 +73,11 @@ function addDays(date, days) {
     return result;
 }
 
+/**
+ * Returns the given Date as a string formatted as "DD.MM." 
+ * @param {Date} inDate Date to get short representation of 
+ * @returns {string} Formatted date "DD.MM."
+ */
 function shortDateString(inDate) {
     return inDate.getDate() + "." + (inDate.getMonth() + 1) + "."
 }

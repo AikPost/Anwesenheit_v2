@@ -5,11 +5,6 @@ function compare_strings(s_1, s_2) {
     if (s_1 > s_2) return 1
 }
 
-
-
-
-class Helpers{}
-
 function copy_visibility_to_attendance_sheets() {
     const attendance_divs = $(".attendance_div:not([hidden])")
 
