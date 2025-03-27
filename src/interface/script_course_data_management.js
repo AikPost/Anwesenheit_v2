@@ -1,5 +1,3 @@
-
-
 function copy_visibility_to_attendance_sheets() {
     const attendance_divs = $(".attendance_div:not([hidden])")
 

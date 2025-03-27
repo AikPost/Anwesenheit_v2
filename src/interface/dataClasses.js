@@ -1,6 +1,6 @@
 class Course {
 
-    constructor({ trainer, abbreviation, name, startTime, endTime, location, contact, dayVerbatim, day, multipleTrainers }) {
+    constructor({ trainer, abbreviation, name, startTime, endTime, location, contact, dayVerbatim, day, multipleTrainers, recipient = undefined }) {
         this.trainer = trainer;
         this.abbreviation = abbreviation;
         this.name = name;
@@ -11,6 +11,8 @@ class Course {
         this.dayVerbatim = dayVerbatim;
         this.day = day;
         this.multipleTrainers = multipleTrainers;
+
+        this.ID = this.trainer + this.day + this.startTime + this.endTime
     }
 
     static fromCourseTableRow(jqSelector) {

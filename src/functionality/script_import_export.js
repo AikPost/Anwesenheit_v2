@@ -140,7 +140,7 @@ function import_all_helper(user_input_parsed) {
         let course_data = user_input_parsed[course_data_key].course_object
         let attendance_data = user_input_parsed[course_data_key].attendance_object
 
-        let new_course_data_tr = add_new_course_data_tr(course_data);
+        let new_course_data_tr = appendToCourseDataTable(course_data);
 
         const new_course_id = new_course_data_tr.find(".course_data_input[course_data=course_id]").val()
 

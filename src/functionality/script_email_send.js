@@ -51,12 +51,22 @@ function getTrainerMailMap() {
 }
 
 
+/**
+ * Get a Map grouping the Course objects gotten from the DOM by trainer.
+ * 
+ * Courses with multiple trainers are duplicated and occur in the appropriate groups
+ * 
+ * The Course objects are augmented by a recipient attr which is set to be the key of the Groupby action.
+ * @param {(RegExp|string)} [trainerSep=/(\s*,\s*)/] 
+ * @returns {Map<string, Array<CourseWithRecipient>>}
+ */
+function getCourseObjectsByTrainer(trainerSep=/\s*,\s*/) {
 
-function getCourseObjectsByTrainer() {
-
+    // get course data as array of Course objects with added item "recipient" containing one trainer name
+    // courses with multiple trainers may will be duplicated with differing recipient attribute values
     let courseList = getCourseObjectArrays()
         .map(function (courseObj) {
-            let trainers = courseObj.trainer.split(/\s*,\s*/);
+            let trainers = courseObj.trainer.split(trainerSep);
             return trainers.map(function (cTrainer) {
                 let out = { ...courseObj };
                 out.multipleTrainers = trainers;

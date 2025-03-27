@@ -25,10 +25,10 @@ function createCourseDataTableRow({
     do {
         new_course_id = generateRandomId();
         console.log(new_course_id);
-    } while (CourseDataTRGen.course_id_set.has(new_course_id))
+    } while (State.courseIdSet.has(new_course_id))
 
     console.log(new_course_id)
-    CourseDataTRGen.course_id_set.add(new_course_id);
+    State.courseIdSet.add(new_course_id);
 
     new_course_data_tr.find(".course_data_input[course_data=course_id]").val(new_course_id);
 
@@ -53,11 +53,10 @@ function createCourseDataTableRow({
  * @returns {jQuery} jQuery selector of the new row
  */
 function appendToCourseDataTable(course_data) {
-    const new_course_data_tr = createCourseDataTableRow(course_data);
-
     const course_data_container = $("#course_data_tbody");
 
+    const new_course_data_tr = createCourseDataTableRow(course_data);
     course_data_container.append(new_course_data_tr)
 
-    return new_course_data_tr
+    return new_course_data_tr;
 }

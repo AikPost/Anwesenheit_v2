@@ -34,7 +34,13 @@ function compare_course_by_trainer(c_1, c_2) {
     if (comp != 0) return comp;
 
     return compare_course_by_time(c_1, c_2)
+}
 
-
-
+/**
+ * 
+ * @param {String} s_1 
+ * @param {String} s_2 
+ */
+function compare_strings(s_1, s_2){
+    return s_1.localeCompare(s_2);
 }

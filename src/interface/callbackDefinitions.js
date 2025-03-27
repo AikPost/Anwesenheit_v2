@@ -320,23 +320,7 @@ function initCourseTableButtons() {
         }
     )
 
-    // initialize_checkbox_drag_functionality(){
-    $("#course_data_tbody").on(
-        "click",
-        "input.print_toggle",
-        function (evt) {
-            if (evt.shiftKey) {
-                console.log("Pressed Shift Key");
-                console.log(CourseDataTRGen.last_checked_course)
-                console.log($(this).parent().parent())
-
-                courses_inbetween = CourseDataTRGen.last_checked_course.nextUntil($(this).parent().parent())
-                console.log(courses_inbetween)
-            }
-
-            CourseDataTRGen.last_checked_course = $(this).parent().parent()
-        }
-    )
+    
 
 }
 
@@ -408,7 +392,7 @@ function initButtons() {
 
 
     // initialize_export_courseDataToExcel_functionality() {
-    $("#button_export_jsonForExcel").on("click", exportQuarterCourseData);
+    $("#button_export_jsonForExcel").on("click", exportQuarterCourseDataWithRecipients);
 
     //  initialize_manual_toggle_functionality
     $("button#button_toggle_manual").on("click", () => $("#manual").toggle());
