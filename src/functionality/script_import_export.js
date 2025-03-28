@@ -52,16 +52,21 @@ function export_attendances_as_csv() {
             ]
             .join("_")
             .replaceAll(" ","_")
-            download(courseAttendances, fileName + ".csv", "text/csv")
+            downloadDataAsFile(courseAttendances, fileName + ".csv", "text/csv")
         }
     )
 }
 
 function export_all() {
+    const dateString = new Date().toLocaleString().replace(/^(?<date>\d\d)\/(?<month>\d\d)\/(?<year>\d\d\d\d).*/,"$<year>-$<month>-$<date>");
+    const jq_courses = $(".course_data_trow").not("[hidden]");
+    
+    let out = new Object();
+    
+    let  filename = dateString + "_course_and_attendance.json";
+    const userInput = prompt("Dateinamen eingeben:", filename);
+    if (userInput) filename = userInput;
 
-    let jq_courses = $(".course_data_trow").not("[hidden]")
-
-    let out = new Object
 
     jq_courses.each(
         function () {
@@ -82,19 +87,9 @@ function export_all() {
 
             out[course_id] = course_and_attendance_object
         }
-    )
+    );
 
-    console.log(out)
-
-    console.log(
-        JSON.stringify(out)
-    )
-
-    let dateString = new Date().toLocaleString().replace(/^(?<date>\d\d)\/(?<month>\d\d)\/(?<year>\d\d\d\d).*/,"$<year>-$<month>-$<date>");
-    let filename = dateString + "_course_and_attendance.json";
-    let userInput = prompt("Dateinamen eingeben:", filename);
-    if (userInput) filename = userInput;
-    download(JSON.stringify(out), filename, "text/json")
+    downloadAsJSON(out, filename);
 
     //prompt("JSON Export", JSON.stringify(out))
 }

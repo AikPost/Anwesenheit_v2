@@ -1,3 +1,5 @@
 *.xlsx
 !__RWC_Anwesenheitslisten_TEMPLATE_PROGRAM.xlsx
+
 jsconfig.json
+scriptTagsGenerated.html

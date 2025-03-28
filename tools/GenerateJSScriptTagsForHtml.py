@@ -39,9 +39,7 @@ def main(directory):
         html_content = generate_html_script_tags(js_files)
         # Write to the output HTML file in the current working directory
         with open("scriptTagsGenerated.html", "w") as f:
-            f.write("<!DOCTYPE html>\n<html>\n<head>\n<title>My Scripts</title>\n</head>\n<body>\n")
             f.write(html_content)
-            f.write("\n</body>\n</html>")
         print("HTML file with script tags has been created.")
     else:
         print("No .js files found in the given directory.")

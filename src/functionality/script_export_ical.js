@@ -61,7 +61,7 @@ function export_courses_as_ical(download = true) {
 
     if (!download) return calendar_data;
 
-    download(
+    downloadDataAsFile(
         calendar_data,
         "exported_calendar.ics",
         "text/calendar"

@@ -204,7 +204,11 @@ function initSideBarButtons() {
 }
 
 function initImportExportButtons() {
-
+    $("button#button_export_attendance_html").on(
+        "click",
+        export_html
+    );
+    
     // initialize_course_export_functionality
     $("#button_export_courses").on("click", function () {
         let jq_courses = $(".course_data_trow").not("[hidden]")
@@ -226,7 +230,7 @@ function initImportExportButtons() {
     // initialize_course_import_functionality
     $("#button_import_courses").on(
         "change",
-        import_courses_by_file
+        import_all_by_file
     )
 
     $("#button_export_courses_as_csv").on(

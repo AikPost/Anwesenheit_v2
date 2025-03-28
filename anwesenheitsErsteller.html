@@ -214,7 +214,7 @@ Beisitz Sport
 						<input class="course_data_input" course_data="course_id" type="text" />
 					</td>
 					<td class="course_data_td_abbreviation">
-						<input class="course_data_input" course_data="abbreviation" type="text" maxlength="12" width="12em"/>
+						<input class="course_data_input" course_data="abbreviation" type="text" maxlength="12" size="15"/>
 					</td>
 					<td class="course_data_td_name">
 						<input class="course_data_input" course_data="name" type="text" />
@@ -396,37 +396,33 @@ Beisitz Sport
 			<button id="button_export_jsonForExcel" class="fit_width_input">Export: Kursdaten für Excel</button>
 		</fieldset>
 	</div>
+	
+	<!-- Scripts in folder: src\interface -->
+	<script src="src\interface\callbackDefinitions.js"></script>
+	<script src="src\interface\attendanceCellModifications.js"></script>
+	<script src="src\interface\script_course_data_management.js"></script>
+	<script src="src\interface\courseData.js"></script>
+	<script src="src\interface\dataClasses.js"></script>
+	<script src="src\interface\attendanceData.js"></script>
 
-	<!--helpers-->
-	<script src="src/helpers/dateFunctions.js"></script>
-	<script src="src/helpers/downloadHelper.js"></script>
-	<script src="src/helpers/misc.js"></script>
-	<script src="src/helpers/otherProgramsInterface.js"></script>
-	<script src="src/helpers/state.js"></script>
+	<!-- Scripts in folder: src\functionality -->
+	<script src="src\functionality\script_email_send.js"></script>
+	<script src="src\functionality\script_email_tool.js"></script>
+	<script src="src\functionality\script_export_coursesByTrainer.js"></script>
+	<script src="src\functionality\script_export_html.js"></script>
+	<script src="src\functionality\script_export_ical.js"></script>
+	<script src="src\functionality\script_import_export.js"></script>
+	<script src="src\functionality\script_attendance_generation.js"></script>
 
-	<!--interface new -->
-	<script src="src/interface/attendanceCellModifications.js"></script>
-	<script src="src/interface/callbackDefinitions.js"></script>
-	<script src="src/interface/attendanceData.js"></script>
-	<script src="src/interface/courseData.js"></script>
-	<script src="src/interface/dataClasses.js"></script>
+	<!-- Scripts in folder: src\helpers -->
+	<script src="src\helpers\dateFunctions.js"></script>
+	<script src="src\helpers\downloadHelper.js"></script>
+	<script src="src\helpers\misc.js"></script>
+	<script src="src\helpers\otherProgramsInterface.js"></script>
+	<script src="src\helpers\state.js"></script>
 
-
-	<!--interface old-->
-	<script src="src/interface/script_course_data_management.js"></script>
-
-
-	<!--functionality new-->
-	<!--functionality old-->
-	<script src="src/functionality/script_attendance_generation.js"></script>
-	<script src="src/functionality/script_import_export.js"></script>
-	<script src="src/functionality/script_email_tool.js"></script>
-	<script src="src/functionality/script_email_send.js"></script>
-	<script src="src/functionality/script_export_ical.js"></script>
-	<script src="src/functionality/script_export_html.js"></script>
-	<script src="src/functionality/script_export_coursesByTrainer.js"></script>
-
-	<script src="src/main.js"></script>
+	<!-- Scripts in folder: src -->
+	<script src="src\main.js"></script>
 </body>
 
 </html>
