@@ -7,19 +7,19 @@
 function calendarWeekOf(date) {
     // Kopiere das Datum, um das ursprüngliche Datum nicht zu verändern
     const tempDate = new Date(date);
-    
+
     // Setze das Datum auf den Montag der Woche
     tempDate.setDate(tempDate.getDate() - tempDate.getDay() + 1);
-    
+
     // Setze das Jahr auf den 1. Januar
     const startOfYear = new Date(tempDate.getFullYear(), 0, 1);
-    
+
     // Berechne die Differenz in Tagen zwischen dem Montag der Woche und dem 1. Januar
     const dayOfYear = Math.floor((tempDate - startOfYear) / (24 * 60 * 60 * 1000));
-    
+
     // Berechne die Kalenderwoche
     const weekNumber = Math.ceil((dayOfYear + 1) / 7);
-    
+
     return weekNumber;
 }
 
@@ -35,10 +35,10 @@ function weekDifference(date_start, date_end) {
         console.error(`Start date ${date_start} is set after end date ${date_end}.`)
         return 0;
     }
-    
+
     let iterating_date = new Date(date_start)
     iterating_date.setHours(0, 0, 0, 0)
-    
+
     let iter_end_date = new Date(date_end)
     iter_end_date.setHours(0, 0, 0, 0)
 
@@ -51,6 +51,54 @@ function weekDifference(date_start, date_end) {
     return week_count
 
 }
+
+/**
+ * Return the german abbreviation of a month given by 0 based index
+ * @param {int} monthIndex 0-indexed (like Date() months)
+ * @returns 
+ */
+function getMonthAbbreviation(monthIndex) {
+    const germanMonthAbrreciations = [
+        "Jan",
+        "Feb",
+        "Mrz",
+        "Apr",
+        "Mai",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Okt",
+        "Nov",
+        "Dez"
+    ];
+
+    return germanMonthAbrreciations[(monthIndex) % 12];
+}
+
+/**
+ * Return the german month name given by 0 based index
+ * @param {int} monthIndex 0-indexed (like Date() months)
+ * @returns 
+ */
+function getVerbatimMonth(monthIndex) {
+    const germanMonthNames = [
+        "Januar",
+        "Februar",
+        "März",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+    ];
+    return germanMonthNames[(monthIndex ) % 12];
+}
+
 /**
  * Returns a German weekday name corresponding to the index 
  * 0=Montag, 1=Dienstag, 2=Mittwoch,...
@@ -100,4 +148,24 @@ function icalStringFromDate(dateIn) {
     ].join("")
 
 
+}
+
+/**
+ * Formats a date as a ISO date string YYYY-MM-DD
+ * @param {Date} dateIn 
+ * @returns {string} date formatted as YYYY-MM-DD
+ */
+function getISODateString(dateIn){
+    return dateIn.toISOString().split("T")[0];
+}
+
+/**
+ * Move a date given as string by n days and return date as string (YYYY-MM-DD)
+ * @param {string} dateStringInput Date string of the format YYYY-MM-DD, intended for data from a date input. Input must be parseable by Date() 
+ * @param {int} dayOffset the days to move the input date by
+ */
+function moveInputFieldDateValue(dateStringInput, dayOffset){
+    let dateValue = new Date(dateStringInput);
+    dateValue.setDate(dateValue.getDate() + dayOffset);
+    return getISODateString(dateValue);
 }

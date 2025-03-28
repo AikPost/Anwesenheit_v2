@@ -4,3 +4,5 @@ initImportExportButtons();
 initCourseTableButtons();
 initButtons();
 initAttendanceClickHandlers();
+
+initInputFields();

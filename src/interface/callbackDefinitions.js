@@ -18,6 +18,23 @@ function initKeyEventHandlers() {
 }
 
 function initSideBarButtons() {
+    // initialize buttons to move back/up period start and end
+    $("#button_moveBackPeriodStart").on("click", function(){
+        $("#quarter_starting_monday").val(moveInputFieldDateValue($("#quarter_starting_monday").val(),7))
+    })
+
+    $("#button_moveUpPeriodStart").on("click", function(){
+        $("#quarter_starting_monday").val(moveInputFieldDateValue($("#quarter_starting_monday").val(),-7))
+    })
+
+    $("#button_moveBackPeriodEnd").on("click", function(){
+        $("#quarter_ending_monday").val(moveInputFieldDateValue($("#quarter_ending_monday").val(),7))
+    })
+
+    $("#button_moveUpPeriodEnd").on("click", function(){
+        $("#quarter_ending_monday").val(moveInputFieldDateValue($("#quarter_ending_monday").val(),-7))
+    })
+
     // initialize_copy_visibility_functionality() {
     $("#button_copy_visibility").on(
         "click",
@@ -403,7 +420,7 @@ function initButtons() {
 
 
     // initialize_add_row_functionality
-    $("button#button_add_row").on("click", () => add_new_course_data_tr({}));
+    $("button#button_add_row").on("click", () => appendToCourseDataTable({}));
 
 
     //  initialize_delete_all_courses_functionality

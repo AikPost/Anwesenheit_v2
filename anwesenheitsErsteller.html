@@ -5,19 +5,6 @@
 	<title>Anwesenheitslistenersteller</title>
 	<meta charset="UTF-8" />
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js"></script>
-	<!--
-		<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script> 
-		
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-		
-		<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-		
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
-		-->
-
-
 	<script
 		src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
 	<link rel="stylesheet" href="styles.css" />
@@ -188,7 +175,6 @@ Beisitz Sport
 			<br>
 			<button id="mail_send_button">Via Mailto Entwürfe an alle Adressaten öffnen</button>
 		</div>
-		<script src="script_email_send.js"></script>
 		<table id="course_data_table" class="noPrint">
 			<thead>
 				<tr>
@@ -319,14 +305,18 @@ Beisitz Sport
 			<legend>Quartaldaten</legend>
 			<label for="quarter_name">Name des Zeitraums</label><br>
 			<input name="quarter_name" type="text" id="quarter_name" class="quarter_data fit_width_input"
-				title="YYYY_mmm-mmm; e.g. 2025_Jan-Mrz" value="Quartalname" />
+				title="YYYY_mmm-mmm; e.g. 2025_Jan-Mrz" placeholder="YYYY_mmm-mmm; e.g. 2025_Jan-Mrz" />
 			<br>
-			<label for="quarter_starting_monday">Erster Montag des Zeitraumes</label>
+			<label for="quarter_starting_monday">Erster Montag</label>
+			<button name="button_moveUpPeriodStart" id="button_moveUpPeriodStart" title="Eine Woche nach vorne">˂</button>
+			<button name="button_moveBackPeriodStart" id="button_moveBackPeriodStart" title="Eine Woche nach hinten">˃</button>
 			<br>
 			<input name="quarter_starting_monday" type="date" id="quarter_starting_monday"
 				class="quarter_data fit_width_input" />
 			<br>
-			<label for="quarter_ending_monday">Letzter Montag des Zeitraums</label>
+			<label for="quarter_ending_monday">Letzter Montag (inkl.)</label>
+			<button name="button_moveUpPeriodEnd" id="button_moveUpPeriodEnd" title="Eine Woche nach vorne">˂</button>
+			<button name="button_moveBackPeriodEnd" id="button_moveBackPeriodEnd" title="Eine Woche nach hinten">˃</button>
 			<br>
 			<input type="date" name="quarter_ending_monday" id="quarter_ending_monday"
 				class="quarter_data fit_width_input"/>
@@ -404,10 +394,10 @@ Beisitz Sport
 	<script src="src\interface\courseData.js"></script>
 	<script src="src\interface\dataClasses.js"></script>
 	<script src="src\interface\attendanceData.js"></script>
+	<script src="src/interface/initInputFields.js"></script>
 
 	<!-- Scripts in folder: src\functionality -->
 	<script src="src\functionality\script_email_send.js"></script>
-	<script src="src\functionality\script_email_tool.js"></script>
 	<script src="src\functionality\script_export_coursesByTrainer.js"></script>
 	<script src="src\functionality\script_export_html.js"></script>
 	<script src="src\functionality\script_export_ical.js"></script>

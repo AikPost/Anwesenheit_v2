@@ -10,27 +10,30 @@ const templateReplacements = new Map([
         (trainer, {}) => trainer.split(" ").at(-1)
     ],[
         "{kurse}",
-        (trainer, {}) => $("#quarter_Name")
+        (trainer, {}) => "Test"
     ],[
         "{qStart}",
-        (trainer, {}) => trainer
+        (trainer, {}) => shortDateString($("#quarter_starting_monday").val())
     ],[
         "{qEnde}",
-        (trainer, {}) => trainer
+        (trainer, {}) => shortDateString($("#quarter_ending_monday").val())
     ],[
         "{qName}",
-        (trainer, {}) => trainer
+        (trainer, {}) => $("#quarter_Name").val()
     ],
 
-])
+]);
 
 function mailTemplateFill(mailTemplate, trainer, courses) {
+    let mailBody = mailTemplate;
     for ([templateString, replacementFunc] of templateReplacements) {
-        mailTemplate.replaceAll(
+        mailBody = mailBody.replaceAll(
             templateString,
             replacementFunc(trainer, courses)
         )
     }
+
+    return mailBody;
 }
 
 /**
