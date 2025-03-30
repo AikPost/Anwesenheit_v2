@@ -56,6 +56,7 @@ function generate_single_plan(course, quarter_data, html_templates) {
         .clone()
         // make it visible
         .removeAttr("hidden")
+        .removeClass("template")
         // assign the course id
         .attr(
             "course_id",

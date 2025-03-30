@@ -1,0 +1,57 @@
+
+/* attendance list cells */
+.teilgenommen {
+	background-color: green;
+}
+
+.abgesagt {
+	background-color: red;
+}
+
+.schnuppern {
+	background-color: yellow;
+}
+
+.ausgefallen {
+	/*background-color: black;*/
+	color: gray;
+	background: repeating-linear-gradient(-45deg,
+			gray 0px,
+			gray 2px,
+			transparent 2px,
+			transparent 9px);
+}
+
+table.attendance_sheet_content_table {
+	table-layout: fixed;
+}
+
+th.attendance_sheet_table_date_header_cell {
+	width: 1.3em;
+	font-weight: normal;
+	background-color: darkgray;
+	color: white;
+}
+
+input.attendance_sheet_table_attendee_input {
+	background-color: inherit;
+	width: 95%;
+	padding: 0;
+	margin: 1px;
+}
+
+
+.attendance_sheet_table_body tr:nth-child(odd) {
+	background-color: lightgray;
+
+}
+
+.entryTable,
+.footerTable {
+	table-layout: fixed;
+}
+
+.signature {
+	color: lightgray;
+	width: 10em;
+}

@@ -1,0 +1,20 @@
+th.sortableColumn:not(.sortKeyAsc):not(.sortKeyDesc)::after {
+    content: " ◆";
+    /* Up and Down Arrow */
+}
+
+/* Ascending order state */
+th.sortableColumn.sortKeyAsc::after {
+    content: " ▲";
+    /* Upwards Arrow */
+}
+
+/* Descending order state */
+th.sortableColumn.sortKeyDesc::after {
+    content: " ▼";
+    /* Downwards Arrow */
+}
+
+.course_data_trow>td {
+	cursor: grab;
+}

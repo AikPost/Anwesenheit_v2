@@ -4,7 +4,7 @@
  * @returns {Array<Course>}
  */
 function getCourseObjectArrays() {
-    return jQuery(".course_data_trow:visible")
+    return jQuery(".course_data_trow:not(.template)")
         .map((index, courseTableRow) => Course.fromCourseTableRow($(courseTableRow)))
         .get();
 }
@@ -19,7 +19,7 @@ function createCourseDataTableRow({
     location = "Clubheim, Uferweg 4",
     contact = ""
 }) {
-    let new_course_data_tr = $(".course_data_trow:hidden").clone().removeAttr("hidden");
+    let new_course_data_tr = $(".course_data_trow.template").clone().removeAttr("hidden").removeClass("template");
 
     let new_course_id = ""
     do {

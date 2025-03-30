@@ -1,0 +1,55 @@
+@media print {
+
+	#Vorschau {
+		position: absolute;
+		top:0;
+		left:0;
+		padding:0;
+		margin:0;
+		display:block !important;
+	}
+
+	.attendance_sheet_table_attendee_input {
+		border: none;
+		outline: none;
+	}
+
+	.attendance_div {
+		page-break-inside: avoid;
+		width: 210mm;
+		height: 297mm;
+		padding: 15mm;
+		display: block;
+	}
+
+	#tabContents {
+		overflow-y:auto !important;
+	}
+
+	th.attendance_sheet_table_date_header_cell {
+		width: 1.3em;
+		font-weight: normal;
+		background-color: darkgray;
+		color: white;
+		font-size: small;
+	}
+
+	#main_content {
+
+		margin-left: 0 !important;
+		/* Same as the width of the sidebar */
+		padding: 0 !important;
+
+	}
+
+	#side_bar {
+		display: none;
+
+	}
+
+	.noPrint,
+	.tab,
+	.template {
+		display: none !important
+	}
+}

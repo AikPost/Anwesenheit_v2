@@ -96,7 +96,7 @@ function getVerbatimMonth(monthIndex) {
         "November",
         "Dezember"
     ];
-    return germanMonthNames[(monthIndex ) % 12];
+    return germanMonthNames[(monthIndex) % 12];
 }
 
 /**
@@ -146,8 +146,6 @@ function icalStringFromDate(dateIn) {
         dateIn.getMinutes().toString().padStart(2, "0"),
         dateIn.getSeconds().toString().padStart(2, "0")
     ].join("")
-
-
 }
 
 /**
@@ -155,7 +153,7 @@ function icalStringFromDate(dateIn) {
  * @param {Date} dateIn 
  * @returns {string} date formatted as YYYY-MM-DD
  */
-function getISODateString(dateIn){
+function getISODateString(dateIn) {
     return dateIn.toISOString().split("T")[0];
 }
 
@@ -164,8 +162,66 @@ function getISODateString(dateIn){
  * @param {string} dateStringInput Date string of the format YYYY-MM-DD, intended for data from a date input. Input must be parseable by Date() 
  * @param {int} dayOffset the days to move the input date by
  */
-function moveInputFieldDateValue(dateStringInput, dayOffset){
-    let dateValue = new Date(dateStringInput);
-    dateValue.setDate(dateValue.getDate() + dayOffset);
+function moveInputFieldDateValue(dateStringInput, dayOffset) {
+    let dateValue = new Date(dateStringInput + "T00:00:00Z");
+    dateValue.setUTCDate(dateValue.getUTCDate() + dayOffset);
     return getISODateString(dateValue);
+}
+
+
+
+
+/**
+ * 
+ * @param {string} dateStringInput a date YYYY-MM-DD
+ * @returns {string} a YYYY-MM-DD Date 
+ */
+function getMondayDateString(dateStringInput) {
+    let dateValue = new Date(dateStringInput + "T00:00:00Z");
+    let dateDelta = (dateValue.getUTCDay() - 1) % 7;
+    dateValue.setUTCDate(dateValue.getUTCDate() - dateDelta);
+    return getISODateString(dateValue);
+}
+
+class DateFormatter {
+    // Static method to format a date based on a template
+    static format(date, template) {
+        const replacements = {
+            YYYY: date.getFullYear(),
+            YY: String(date.getFullYear()).slice(-2),
+            MM: String(date.getMonth() + 1).padStart(2, '0'),
+            M: date.getMonth() + 1,
+            MMM: DateFormatter.getMonthAbbreviation(date.getMonth(), 'short'),
+            MMMM: DateFormatter.getMonthAbbreviation(date.getMonth(), 'long'),
+            D: date.getDate(),
+            DD: String(date.getDate()).padStart(2, '0'),
+            DDD: DateFormatter.getDayAbbreviation(date.getDay(), 'short'),
+            DDDD: DateFormatter.getDayAbbreviation(date.getDay(), 'long'),
+            HH: String(date.getHours()).padStart(2, '0'),
+            H: date.getHours(),
+            mm: String(date.getMinutes()).padStart(2, '0'),
+            m: date.getMinutes(),
+            ss: String(date.getSeconds()).padStart(2, '0'),
+            s: date.getSeconds(),
+        };
+
+        // Replace placeholders in the template string
+        return template.replace(/\b(YYYY|YY|MM|M|MMM|MMMM|D|DD|DDD|DDDD|HH|H|mm|m|ss|s)\b/g, match => replacements[match]);
+    }
+
+    // Helper static method to get the month abbreviation (short or long)
+    static getMonthAbbreviation(monthIndex, type) {
+        const monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const monthNamesLong = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        return type === 'short' ? monthNamesShort[monthIndex] : monthNamesLong[monthIndex];
+    }
+
+    // Helper static method to get the day abbreviation (short or long)
+    static getDayAbbreviation(dayIndex, type) {
+        const dayNamesShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const dayNamesLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+        return type === 'short' ? dayNamesShort[dayIndex] : dayNamesLong[dayIndex];
+    }
 }

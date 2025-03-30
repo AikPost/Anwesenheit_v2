@@ -1,0 +1,23 @@
+input.fit_width_input {
+	width: -moz-available;
+	width: stretch;
+}
+
+fieldset {
+	padding: 5px;
+	margin: 10px 0px;
+}
+
+#side_bar {
+	box-sizing: border-box;
+	height: 100%;
+	/* Full-height: remove this if you want "auto" height */
+	width: 220px;
+	/* Set the width of the sidebar */
+	/* Fixed Sidebar (stay in place on scroll) */
+	border-right: 1px solid black;
+	overflow-x: hidden;
+	/* Disable horizontal scroll */
+	padding: 2px;
+	background-color: darkgray;
+}
